@@ -1,14 +1,12 @@
 use super::*;
 
-/// If `A` implements `FromBit`, then `A::Output` is the `Bit` equivalent to `A`.
+/// If `A` implements `FromBit`, then `A::Output` is the [Bit] equivalent to `A`.
 pub trait FromBit {
     /// The bit which can be converted into the Self.
     type Output: Bit;
 }
 
-/// Reciprocal of [FromBit].
-/// 
-/// Converts the implementor's type into a bit.
+/// Converts the implementor's type into a [Bit].
 pub trait IntoBit {
     /// The output type of the conversion.
     type Output: Bit;

@@ -1,14 +1,12 @@
 use super::*;
 
-/// If `A` implements `FromRational`, then `A::Output` is the `Rational` equivalent to `A`.
+/// If `A` implements `FromRational`, then `A::Output` is the [Rational] equivalent to `A`.
 pub trait FromRational {
     /// The Rational which can be converted into the Self.
     type Output: Rational;
 }
 
-/// Reciprocal of [FromRational].
-/// 
-/// Converts the implementor's type into a Rational.
+/// Converts the implementor's type into a [Rational].
 pub trait IntoRational {
     /// The output type of the conversion.
     type Output: Rational;

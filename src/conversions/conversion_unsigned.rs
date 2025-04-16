@@ -1,14 +1,12 @@
 use super::*;
 
-/// If `A` implements `FromUnsigned`, then `A::Output` is the `Unsigned` equivalent to `A`.
+/// If `A` implements `FromUnsigned`, then `A::Output` is the [Unsigned] equivalent to `A`.
 pub trait FromUnsigned {
     /// The Unsigned which can be converted into the Self.
     type Output: Unsigned;
 }
 
-/// Reciprocal of [FromUnsigned].
-/// 
-/// Converts the implementor's type into a Unsigned.
+/// Converts the implementor's type into a [Unsigned].
 pub trait IntoUnsigned {
     /// The output type of the conversion.
     type Output: Unsigned;

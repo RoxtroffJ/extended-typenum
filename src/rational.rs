@@ -21,8 +21,9 @@ pub use simplify::*;
 
 /// Macro to create a rational number type.
 /// 
-/// It takes two types as arguments, the numerator and the denominator.
-/// The numerator is an [Integer] type, and the denominator is an [Unsigned] type.
+/// It takes one or two arguments.
+/// If one is given, the argument is converted into a rational with the [IntoRational] trait.
+/// If two are given, the first is the numerator and must be [IntoInteger] and the second is the denominator and must be [IntoUnsigned].
 /// 
 /// Example:
 /// ```
@@ -30,16 +31,23 @@ pub use simplify::*;
 /// use extended_typenum::rational::*;
 /// 
 /// type R1 = rational!(P6, U8);
-/// type R2 = rational!(P3, U4);
+/// type R2 = rational!(U3, P4);
 /// // type R3 = rational!(P6, U0); This will fail, we can't divide by zero.
 /// 
 /// assert_type_eq!(R1, R2);
 /// 
+/// type R4 = rational!(B1);
+/// assert_type_eq!(R4, R<P1, U1>);
+/// 
 /// ```
 #[macro_export]
 macro_rules! rational{
+    ($n: ty) => {
+        <$n as IntoRational>::Output
+    };
+
     ($n: ty, $d: ty) => {
-        <R<$n, $d> as Simplify>::Output
+        <R<<$n as IntoInteger>::Output, <$d as IntoUnsigned>::Output> as Simplify>::Output
     };
 }
 

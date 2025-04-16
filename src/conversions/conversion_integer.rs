@@ -1,14 +1,12 @@
 use super::*;
 
-/// If `A` implements `FromInteger`, then `A::Output` is the `Integer` equivalent to `A`.
+/// If `A` implements `FromInteger`, then `A::Output` is the [Integer] equivalent to `A`.
 pub trait FromInteger {
     /// The Integer which can be converted into the Self.
     type Output: Integer;
 }
 
-/// Reciprocal of [FromInteger].
-/// 
-/// Converts the implementor's type into a Integer.
+/// Converts the implementor's type into a [Integer].
 pub trait IntoInteger {
     /// The output type of the conversion.
     type Output: Integer;
