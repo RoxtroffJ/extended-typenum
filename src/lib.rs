@@ -8,3 +8,6 @@ pub use rational::*;
 
 pub mod conversions;
 pub use conversions::*;
+
+pub mod operator_aliases_extended;
+pub use operator_aliases_extended::*;

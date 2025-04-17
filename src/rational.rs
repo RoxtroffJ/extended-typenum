@@ -8,12 +8,27 @@
 use super::*;
 
 /// A type level rational number.
-#[derive(Eq, PartialEq, Ord, PartialOrd, Clone, Copy, Hash, Debug, Default)]
+#[derive(Clone, Copy, Hash, Debug, Default)]
 pub struct R<N: Integer, D: Unsigned + NonZero> {
     pub(crate) num: N,
     pub(crate) den: D
 }
+impl<N: Integer, D: Unsigned + NonZero> R<N, D> {
+    /// Creates a new rational number.
+    pub fn new() -> Self {
+        Self::default()
+    }
 
+    /// Returns the numerator of the rational number.
+    pub fn numerator(&self) -> N {
+        self.num
+    }
+
+    /// Returns the denominator of the rational number.
+    pub fn denominator(&self) -> D {
+        self.den
+    }
+}
 
 mod simplify;
 pub use simplify::*;
@@ -52,6 +67,22 @@ macro_rules! rational{
 }
 
 /// Marker trait for rational numbers.
-pub trait Rational {}
+pub trait Rational {
+    /// Returns a `f32` representation of the rational number.
+    fn to_f32(&self) -> f32;
 
-impl<N: Integer, D: Unsigned + NonZero> Rational for R<N,D> {}
+    /// Returns a `f64` representation of the rational number.
+    fn to_f64(&self) -> f64;
+}
+
+impl<N: Integer, D: Unsigned + NonZero> Rational for R<N,D> {
+    fn to_f32(&self) -> f32 {
+        (N::to_i16() as f32) / (D::to_u16() as f32)
+    }
+
+    fn to_f64(&self) -> f64 {
+        (N::to_i32() as f64) / (D::to_u32() as f64)
+    }
+}
+
+mod operations;
