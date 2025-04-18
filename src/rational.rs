@@ -2,8 +2,8 @@
 //! 
 //! Rational numbers are represented by a pair of integers, the numerator and the denominator.
 //! If there are two different representations of the same rational number, the compiler will not consider them equal.
-//! Therefore, it is required to **always** [simplify](Simplify) the representations. This is why it is not recommended to
-//! use the types defined here directly. Instead, always use the [rational!] macro.
+//! Therefore, it is required to **always** [simplify](Simplify) the representations, and the crate assumes it is always the case.
+//! This is why it is not recommended to use the types defined here directly. Instead, use the [rational!] macro or [ToRational] alias.
 
 use super::*;
 
@@ -33,7 +33,7 @@ impl<N: Integer, D: Unsigned + NonZero> R<N, D> {
 
     /// Builds a rational number from a numerator and denominator.
     /// 
-    /// This number is the same as the one created by the [new] method, but rust can guess which type of rational you want to create with the arguments.
+    /// This number is the same as the one created by the [new](R::new) method, but rust can guess which type of rational you want to create with the arguments.
     /// 
     /// **Warning:** Don't forget to simplify the result!
     pub fn from_parts(num: N, den: D) -> Self {
