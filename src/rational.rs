@@ -8,13 +8,15 @@
 use super::*;
 
 /// A type level rational number.
-#[derive(Clone, Copy, Hash, Debug, Default)]
+#[derive(Clone, Copy, Hash, Debug, Default, PartialEq, Eq, PartialOrd, Ord)]
 pub struct R<N: Integer, D: Unsigned + NonZero> {
     pub(crate) num: N,
     pub(crate) den: D
 }
 impl<N: Integer, D: Unsigned + NonZero> R<N, D> {
     /// Creates a new rational number.
+    /// 
+    /// **Warning:** Don't forget to simplify it!
     pub fn new() -> Self {
         Self::default()
     }
@@ -27,6 +29,15 @@ impl<N: Integer, D: Unsigned + NonZero> R<N, D> {
     /// Returns the denominator of the rational number.
     pub fn denominator(&self) -> D {
         self.den
+    }
+
+    /// Builds a rational number from a numerator and denominator.
+    /// 
+    /// This number is the same as the one created by the [new] method, but rust can guess which type of rational you want to create with the arguments.
+    /// 
+    /// **Warning:** Don't forget to simplify the result!
+    pub fn from_parts(num: N, den: D) -> Self {
+        Self { num, den }
     }
 }
 
@@ -45,23 +56,33 @@ pub use simplify::*;
 /// use crate::extended_typenum::*;
 /// use extended_typenum::rational::*;
 /// 
-/// type R1 = rational!(P6, U8);
-/// type R2 = rational!(U3, P4);
+/// type R1 = rational!(P6, U8); // Expands to <R<P6, U8> as Simplify>::Output.
+/// type R2 = rational!(U3; P4); // If conversions are needed for the above to work, use a ; instead of a ,.
 /// // type R3 = rational!(P6, U0); This will fail, we can't divide by zero.
 /// 
 /// assert_type_eq!(R1, R2);
 /// 
-/// type R4 = rational!(B1);
+/// type R4 = rational!(P1); // Expands to R<P1, U1>.
+/// type R5 = rational!(B1;); // If conversions are needed, use a ;. Expands to <B1 as IntoRational>::Output.
+/// 
+/// assert_type_eq!(R4, R5);
 /// assert_type_eq!(R4, R<P1, U1>);
 /// 
 /// ```
+/// 
+/// Note: Operator [Pow] is not implemented for rational exponents due to skill issue.
 #[macro_export]
 macro_rules! rational{
     ($n: ty) => {
+        R<$n, U1>
+    };
+    ($n: ty;) => {
         <$n as IntoRational>::Output
     };
-
     ($n: ty, $d: ty) => {
+        <R<$n, $d> as Simplify>::Output
+    };
+    ($n: ty; $d: ty) => {
         <R<<$n as IntoInteger>::Output, <$d as IntoUnsigned>::Output> as Simplify>::Output
     };
 }
