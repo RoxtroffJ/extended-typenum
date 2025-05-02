@@ -4,6 +4,8 @@
 //! If there are two different representations of the same rational number, the compiler will not consider them equal.
 //! Therefore, it is required to **always** [simplify](Simplify) the representations, and the crate assumes it is always the case.
 //! This is why it is not recommended to use the types defined here directly. Instead, use the [rational!] macro or [ToRational] alias.
+//! 
+//! Note: Operator [Pow] is not implemented for rational exponents. It will be added in the future if I find a way to do it.
 
 use super::*;
 
@@ -69,8 +71,6 @@ pub use simplify::*;
 /// assert_type_eq!(R4, R<P1, U1>);
 /// 
 /// ```
-/// 
-/// Note: Operator [Pow] is not implemented for rational exponents due to skill issue.
 #[macro_export]
 macro_rules! rational{
     ($n: ty) => {
