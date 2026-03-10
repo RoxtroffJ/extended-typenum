@@ -11,3 +11,6 @@ pub use conversions::*;
 
 pub mod operator_aliases_extended;
 pub use operator_aliases_extended::*;
+
+pub mod type_operators_extended;
+pub use type_operators_extended::*;
