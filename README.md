@@ -9,3 +9,4 @@ It adds:
 - Operations on any (non numeric) types:
   - Equality operator on any type
   - Ordering of types
+ONGOING ISSUE: One can define cycling orderings of types...
