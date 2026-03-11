@@ -6,3 +6,5 @@ It adds:
 
 - Conversions between types
 - Type level rational
+- Various type operators:
+  - If then else
