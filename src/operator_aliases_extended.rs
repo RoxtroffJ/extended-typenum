@@ -26,3 +26,6 @@ pub type Simplified<R> = <R as Simplify>::Output;
 /// 
 /// Based on the [TypeIf] trait.
 pub type If<Cond, Then, Else> = <Cond as TypeIf<Then, Else>>::Output;
+
+/// Indicates if a type is zero.
+pub type IsNull<A> = <A as IsZero>::Output;

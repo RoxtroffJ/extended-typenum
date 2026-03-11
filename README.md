@@ -8,3 +8,4 @@ It adds:
 - Type level rational
 - Various type operators:
   - If then else
+  - Is zero check (returns bool instead of being implemented or not)
