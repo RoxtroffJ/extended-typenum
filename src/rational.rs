@@ -74,16 +74,16 @@ pub use simplify::*;
 #[macro_export]
 macro_rules! rational{
     ($n: ty) => {
-        R<$n, U1>
+        $crate::R<$n, $crate::U1>
     };
     ($n: ty;) => {
-        <$n as IntoRational>::Output
+        <$n as $crate::IntoRational>::Output
     };
     ($n: ty, $d: ty) => {
         <R<$n, $d> as Simplify>::Output
     };
     ($n: ty; $d: ty) => {
-        <R<<$n as IntoInteger>::Output, <$d as IntoUnsigned>::Output> as Simplify>::Output
+        <R<<$n as $crate::IntoInteger>::Output, <$d as $crate::IntoUnsigned>::Output> as Simplify>::Output
     };
 }
 

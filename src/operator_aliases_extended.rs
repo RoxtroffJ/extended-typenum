@@ -29,3 +29,6 @@ pub type If<Cond, Then, Else> = <Cond as TypeIf<Then, Else>>::Output;
 
 /// Indicates if a type is zero.
 pub type IsNull<A> = <A as IsZero>::Output;
+
+/// Returns the type of zero compatible with implementing type.
+pub type ZeroOf<A> = <A as GetZero>::Output;

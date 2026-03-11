@@ -9,3 +9,4 @@ It adds:
 - Various type operators:
   - If then else
   - Is zero check (returns bool instead of being implemented or not)
+  - Get corresponding zero
