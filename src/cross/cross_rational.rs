@@ -9,8 +9,8 @@ use crate::{
     IntoUnsigned, IsZero, Simplify,
 };
 
-/// Same as a [rational](crate::rational) but enables operations with right hand sides being other types 
-/// ([uint](crate::uint), [rational](crate::rational), ...)
+/// Same as a [rational](mod@crate::rational) but enables operations with right hand sides being other types 
+/// ([uint](crate::uint), [int](crate::int), ...)
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct CrossRational<R> {

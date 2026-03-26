@@ -9,7 +9,7 @@ use crate::{
     IntoUnsigned, IsZero, R,
 };
 
-/// Same as a [int](crate::int) but enables operations with right hand sides being other types ([uint](crate::uint), [rational](crate::rational), ...)
+/// Same as a [int](crate::int) but enables operations with right hand sides being other types ([uint](crate::uint), [rational](mod@crate::rational), ...)
 ///
 /// Note: although most traits are implemented automatically using [IntoInteger], some are not, and need to be implemented by hand.
 /// Here is the list of these traits:
