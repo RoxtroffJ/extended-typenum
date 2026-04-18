@@ -13,3 +13,5 @@ It adds:
   - If then else
   - Is zero check (returns bool instead of being implemented or not)
   - Get corresponding zero
+
+- Display trait for types
