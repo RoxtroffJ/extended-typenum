@@ -89,6 +89,12 @@ macro_rules! rational{
 
 /// Marker trait for rational numbers.
 pub trait Rational {
+    /// The [`f32`] corresponding to this rational.
+    const F32: f32;
+
+    /// The [`f64`] corresponding to this rational.
+    const F64: f64;
+
     /// Returns a `f32` representation of the rational number.
     fn to_f32(&self) -> f32;
 
@@ -97,12 +103,15 @@ pub trait Rational {
 }
 
 impl<N: Integer, D: Unsigned + NonZero> Rational for R<N,D> {
+    const F32: f32 = N::I64 as f32 / D::I64 as f32;
+    const F64: f64 = N::I64 as f64 / D::U64 as f64;
+
     fn to_f32(&self) -> f32 {
-        (N::to_i16() as f32) / (D::to_u16() as f32)
+        (N::to_i64() as f32) / (D::to_u64() as f32)
     }
 
     fn to_f64(&self) -> f64 {
-        (N::to_i32() as f64) / (D::to_u32() as f64)
+        (N::to_i64() as f64) / (D::to_u64() as f64)
     }
 }
 
