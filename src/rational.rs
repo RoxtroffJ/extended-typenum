@@ -80,10 +80,10 @@ macro_rules! rational{
         <$n as $crate::IntoRational>::Output
     };
     ($n: ty, $d: ty) => {
-        <R<$n, $d> as Simplify>::Output
+        <$crate::R<$n, $d> as $crate::rational::Simplify>::Output
     };
     ($n: ty; $d: ty) => {
-        <R<<$n as $crate::IntoInteger>::Output, <$d as $crate::IntoUnsigned>::Output> as Simplify>::Output
+        <$crate::R<<$n as $crate::IntoInteger>::Output, <$d as $crate::IntoUnsigned>::Output> as $crate::rational::Simplify>::Output
     };
 }
 
